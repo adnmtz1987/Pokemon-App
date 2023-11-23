@@ -1,15 +1,15 @@
-const { Pokemon, Type } = require('../db');
+const { Pokemon, Type } = require('../db.js');
 
-const updatePokemon = async ( name, {image, hp, attack, defense, speed, height, weight, types}) => {
+const updatePokemon = async (name, {image ,hp, attack, defense, speed, height, weight, types}) => {
     try {
         const pokemon = await Pokemon.findOne({where: { name }, include: Type})
-
+        
         if(!pokemon){
             return null
         }
 
         if(types){
-            const typesToChange = await Promise.all(types.map(type=> Type.findeOne({ where: { name: type}})))
+            const typesToChange = await Promise.all(types.map(type=> Type.findOne({where: { name: type}})))
             await pokemon.setTypes(typesToChange);
         }
 
@@ -29,4 +29,4 @@ const updatePokemon = async ( name, {image, hp, attack, defense, speed, height, 
     }
 }
 
-module.exports = { updatePokemon };
+module.exports = {updatePokemon};

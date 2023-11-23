@@ -1,10 +1,10 @@
-const { Pokemon } = require('../db');
+const { Pokemon } = require('../db.js');
 
 const deletePokemon = async (name) => {
 
     try {
         const pokemon = await Pokemon.destroy({
-            where: { name: name}
+            where: { name: name }
         })
         if(!pokemon){
             return null
@@ -15,4 +15,4 @@ const deletePokemon = async (name) => {
     }
 }
 
-module.exports = { deletePokemon };
+module.exports = {deletePokemon};

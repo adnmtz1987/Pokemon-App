@@ -1,163 +1,166 @@
 const { DataTypes, Sequelize } = require('sequelize');
+// Exportamos una funcion que define el modelo
+// Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
-  
+  // defino el modelo
   sequelize.define('pokemon', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUID,   
       defaultValue: Sequelize.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, 
       allowNull: false,
       unique: true,
-      validate: {
-        notNull: {
-          msg: 'Name cannot be null'// validamos para que no este nulo name
+      validate:{
+        notNull:{
+           msg: "Name is required"//verificar si el nombre no es null
         },
-        notEmpty: {
-          msg: 'Name cannot be empty' // validamos para que no esté vacío el nombre del pokemon
+        notEmpty:{
+          msg: "Name can't be empty"//verificar si el nombre no esta vacio
         },
-        len: {
+        len:{
           args: [3, 50],
-          msg: "The name must have between 3 and 50 characters"
-        }
+          msg: "Name must be between 3 and 50 characters"//verificar si el nombre tiene entre 3 y 50 caracteres
+        },
       }
     },
-    image: {
+    image:{
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
+      validate:{
         isUrl: {
-          msg: 'Invalid URL for the Pokemon Image.'// verificar que la imagen sea una url
+          msg: "Image must be an URL"//verificar si la imagen es una URL
         },
-        notEmpty: {
-          msg: 'Image cannot be empty' // validamos para que no esté vacío la imagen
+        notEmpty:{
+          msg: "Image can't be empty"//verificar si la imagen no esta vacia
         },
-        notNull: {
-          msg: 'Image cannot be null' // validamos para que no este nula la imagen
-        }
+        notNull:{
+          msg: "Image is required"//verificar si la imagen no es null
+        },
       }
     },
-    hp: {
+    hp:{
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        isNumeric: {
-          msg: 'HP must be a number' // validamos para que sea un numero entero
+      validate:{
+        isNumeric:{
+          msg: "Hp must be a number"//verificar si los puntos de vida son un numero
         },
-        notNull: {
-          msg: 'HP cannot be null' // validamos para que no este nulo hp
+        notNull:{
+          msg: "Hp is required"//verificar si los puntos de vida no son null
         },
-        notEmpty: {
-          msg: 'HP cannot be empty' // validamos para que no esté vacío el HP
+        notEmpty:{
+          msg: "Hp can't be empty"//verificar si los puntos de vida no estan vacios
         },
-        min: {
+        min:{
           args: [100],
-          msg: 'HP must be greater than or equal to 100' // validamos que los puntos de vida sean minimo 100
+          msg: "Hp must be greater than 100"//verificar si los puntos de vida son mayores a 100
         },
-        max: {
-          args: [500],
-          msg: 'HP must be less than or equal to 500' // validamos que los puntos de vida sean maximo 500
+        max:{
+          "args": [500],
+          msg: "Hp must be less than 500"//verificar si los puntos de vida son menores a 500
         }
       }
     },
-    attack: {
+    attack:{
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        isNumeric: {
-          msg: 'Attack power must be a number' // validamos para que sea un numero entero
+      validate:{
+        isNumeric:{
+          msg: "Attack must be a number"//verificar si los puntos de ataque son un numero
         },
-        notNull: {
-          msg: 'Attack power cannot be null' // validamos para que no este nulo ataque
+        notNull:{
+          msg: "Attack is required"//verificar si los puntos de ataque no son null
         },
-        notEmpty: {
-          msg: 'Attack power cannot be empty' // validamos para que no esté vacío el ataque
+        notEmpty:{
+          msg: "Attack can't be empty"//verificar si los puntos de ataque no estan vacios
         },
-        min: {
+        min:{
           args: [5],
-          msg: 'Attack power must be greater than or equal to 5' // validamos que el poder de ataque sea minimo 5
+          msg: "Attack must be greater than 5"//verificar si los puntos de ataque son mayores a 5
         },
-        max: {
+        max:{
           args: [200],
-          msg: 'Attack power must be less than or equal to 200' // validamos que el poder de ataque sea maximo 200
+          msg: "Attack must be less than 200"//verificar si los puntos de ataque son menores a 200
         }
       }
     },
-    defense: {
+    defense:{
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        isNumeric: {
-          msg: 'Defense points must be a number' // validamos para que sea un numero entero
+      validate:{
+        isNumeric:{
+          msg: "Defense must be a number"//verificar si los puntos de defensa son un numero
         },
-        notNull: {
-          msg: 'Defense points cannot be null' // validamos para que no este nulo defensa
+        notNull:{
+          msg: "Defense is required"//verificar si los puntos de defensa no son null
         },
-        notEmpty: {
-          msg: 'Defense points cannot be empty' // validamos para que no esté vacío la defensa
+        notEmpty:{
+          msg: "Defense can't be empty"//verificar si los puntos de defensa no estan vacios
         },
-        min: {
+        min:{
           args: [5],
-          msg: 'Defense must be greater than 5' // validamos que los puntos de defensa sean minimo 5
+          msg: "Defense must be greater than 5"//verificar si los puntos de defensa son mayores a 5
         },
-        max: {
+        max:{
           args: [200],
-          msg: 'Defense must be less than or equal to 200' // validamos que los puntos de defensa sean maximo 200
+          msg: "Defense must be less than 200"//verificar si los puntos de defensa son menores a 200
         }
       }
     },
     speed:{
       type: DataTypes.INTEGER,
-      validate: {
-        isNumeric: {
-          msg: 'Speed must be a number' // validamos para que sea un numero entero
+      validate:{
+        isNumeric:{
+          msg: "Speed must be a number"//verificar si los puntos de velocidad son un numero
         },
-        min: {
+        min:{
           args: [10],
-          msg: 'Speed must be greater than 10' // validamos que los puntos de velocidad sean minimo 10
+          msg: "Speed must be greater than 10"//verificar si los puntos de velocidad son mayores a 5
         },
-        max: {
+        max:{
           args: [150],
-          msg: 'Speed must be less than 150' // validamos que los puntos de velocidad sean maximo 150
+          msg: "Speed must be less than 150"//verificar si los puntos de velocidad son menores a 200
         }
       }
     },
-    height: {
+    height:{
       type: DataTypes.INTEGER,
-      validate: {
-        isNumeric: {
-          msg: 'Height must be a number' // validamos para que sea un numero entero
+      validate:{
+        isNumeric:{
+          msg: "Height must be a number"//verificar si la altura es un numero
         },
-        min: {
+        min:{
           args: [1],
-          msg: 'Height must be greater than 1' // validamos que el tamaño del jugador sea minimo 1
+          msg: "Height must be greater than 1"//verificar si la altura es mayor a 1
         },
-        max: {
-          args: [15],
-          msg: 'Height must be less than 15' // validamos que el tamaño del jugador sea maximo 15
-        }
+        max:{
+          args: [150],
+          msg: "Height must be less than 15"//verificar si la altura es menor a 15
+        },
       }
     },
-    weight: {
+    weight:{
       type: DataTypes.INTEGER,
-      validate: {
-        isNumeric: {
-          msg: 'Weight must be a number' // validamos para que sea un numero entero
+      validate:{
+        isNumeric:{
+          msg: "Weight must be a number"//verificar si el peso es un numero
         },
-        min: {
+        min:{
           args: [1],
-          msg: 'Weight must be greater than 1' // validamos que el peso del jugador sea minimo 1
+          msg: "Weight must be greater than 1"//verificar si el peso es mayor a 1
         },
-        max: {
+        max:{
           args: [1000],
-          msg: 'Weight must be less than 1000' // validamos que el peso del jugador sea maximo 1000
+          msg: "Weight must be less than 100"//verificar si el peso es menor a 100
         }
       }
-    }
+    },
   }, {
-    timestamps: false,
-  });
+    timestamps: false,});
 };
+
+

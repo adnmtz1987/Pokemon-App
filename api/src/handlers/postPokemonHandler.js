@@ -1,8 +1,8 @@
-const { postPokemon } = require("../controllers/postPokemon");
+const { postPokemon } = require('../controllers/postPokemon.js');
 
-const postPokemonHandler = async(req, res) => {
-    const {name, image, hp, attack, defense, speed, height, weight, types} = req.body;
-    try{
+const postPokemonHandler = async (req, res) => {
+    const {name, image, hp, attack, defense, speed, height, weight, types } = req.body;
+    try {
         const response = await postPokemon(name, image, hp, attack, defense, speed, height, weight, types);
         if(!response){
             return res.status(400).send(error.message)
@@ -13,4 +13,4 @@ const postPokemonHandler = async(req, res) => {
     }
 }
 
-module.exports = { postPokemonHandler };
+module.exports = { postPokemonHandler }

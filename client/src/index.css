@@ -1,5 +1,21 @@
+:root{
+--keppel-50: #f0fdfb;
+--keppel-100: #ffffff;
+--keppel-200: #97f8eb;
+--keppel-300: #ed5b5b;
+--keppel-400: #29d8cc;
+--keppel-500: #0faea6;
+--keppel-600: #0a9793;
+--keppel-700: #0d7876;
+--keppel-800: #0f6060;
+--keppel-900: #124f4f;
+--keppel-950: #000000;
+
+}
+
 body {
   margin: 0;
+  background-color: var(--keppel-100);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

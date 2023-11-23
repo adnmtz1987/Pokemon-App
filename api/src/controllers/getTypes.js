@@ -9,7 +9,14 @@ const getAllTypes = async () => {
         const { data } = await axios("https://pokeapi.co/api/v2/type")
         const types = data.results.map(type => type.name)
         
+        const newType = ['Volador']
+
+        types.push(newType)//poder agregar nuevos typos de manera manual, buscar para que el usuario pueda crear nuevos tipos desde el front
+        
+
         await Type.bulkCreate(types.map(type => ({name: type}))) 
+
+
 
         return types
     } catch (error) {
